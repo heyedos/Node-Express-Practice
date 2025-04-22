@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const adminRoutes = require('./routes/admin');
+const homeRoute = require('./routes/home');
 
-app.use('/Users',(req,res,next)=>{
-    console.log("hello from users");
-    res.send('<h1>Hello From Users Page</h1>');
-})
+app.use(bodyParser.urlencoded({extended:false}));
 
-app.use('/',(req,res,next)=>{
-    console.log("hello from second middleware");
-    res.send("<h1>Hello From Home Page</h1>");
-})
+app.use(adminRoutes);
+
+app.use(homeRoute);
 
 app.listen(3000);
